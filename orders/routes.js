@@ -2,7 +2,7 @@ const orderroute = require("express").Router();
 const {
   getAdminOrders,
   updateAdminOrders,
-  getOrderHistory,
+  findorders,
   orderrating,
   orderdetail,
   addorder
@@ -25,7 +25,7 @@ orderroute.put("/updateAdminOrders/:_id", updateAdminOrders);
 
 // get history of all orders of particular user by user id
 
-orderroute.get("/getOrderHistory/:_id", getOrderHistory);
+orderroute.post("/findorders", findorders);
 
 
 // order rating which is done by after payment with order id

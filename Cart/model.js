@@ -7,6 +7,9 @@ const cartschema = new mongoose.Schema({
   },
   items: [
     {
+      itemimg:{
+        type:String
+      },
       itemId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Item",

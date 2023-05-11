@@ -14,6 +14,7 @@ const addcartitems=async(req,res)=>{
         cart.map(async(val)=>{
             const Items=[
                 {
+                    itemimg:val.photo,
                     itemId:val._id,
                     itemname:val.name,
                     quantity:val.quantity,
@@ -23,7 +24,7 @@ const addcartitems=async(req,res)=>{
             ]
             resId=val.restaurant;
             // addcart.items.push(Items);
-            await Cart.updateOne({userId:userId},{
+            await Cart.updateOne({_id:addcart._id},{
                 $push:{items:Items}
             })
            

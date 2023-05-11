@@ -74,7 +74,7 @@ const userschema = new mongoose.Schema(
     },
     cashbackpoints:{
       type:Number,
-      default:0
+      default:100
     },
     dob:{
       type:String

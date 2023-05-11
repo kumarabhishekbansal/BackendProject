@@ -197,11 +197,11 @@ const addcashbackpoints = async (req, res) => {
   }
 };
 
-const getuser=async()=>{
+const getuser=async(req,res)=>{
   try {
     console.log("enter getuser");
     const {id}=req.body;
-    console.log(id);
+    // console.log(id);
     const userfind=await User.findById({_id:id});
     if(userfind)
     {
@@ -214,6 +214,7 @@ const getuser=async()=>{
       message:"error while getting user"
     })
   } catch (error) {
+    console.log(error);
     console.log("error while getting getuser");
   }
 }

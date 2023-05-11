@@ -51,14 +51,18 @@ const updateAdminOrders = async (req, res) => {
   }
 };
 
-const getOrderHistory=async(req,res)=>{
+const findorders=async(req,res)=>{
     try {
-        const {_id}=req.params;
+      console.log("enter findorders");
+        const {id}=req.body;
         const findorders=await Order.find({
-            customerId:_id
-        })
+            customerId:id
+        }).populate("orderDetails","-userId")
+        .populate("resId")
+
         if(findorders)
         {
+          // console.log("findorders ",findorders);
             return res.status(200).json({
                 message:"getting order history",
                 data:findorders
@@ -184,7 +188,7 @@ const addorder=async(data)=>{
 module.exports = {
   getAdminOrders,
   updateAdminOrders,
-  getOrderHistory,
+  findorders,
   orderrating,
   orderdetail,
   addorder
