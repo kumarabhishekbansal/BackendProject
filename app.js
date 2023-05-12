@@ -12,6 +12,8 @@ const {resturantroute}=require("./Resturants/routes");
 const {orderroute}=require('./orders/routes');
 const {itemroute}=require('./Items/routes');
 const {cartroute}=require("./Cart/routes")
+
+const {msgroute}=require("./message/route");
 // mongo db connection
 
 require("./db/conn");
@@ -28,6 +30,7 @@ app.use('/orders',orderroute);
 app.use('/api/item',itemroute);
 app.use('/api/pay',paymentrouter);
 app.use('/api/cart',cartroute);
+app.use('/api/msg',msgroute);
 // app.use(bodyParser.json({limit: '50mb'}));
 // app.use(bodyParser.urlencoded({limit: '50mb',extended:true}));
 
