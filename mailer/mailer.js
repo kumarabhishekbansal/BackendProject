@@ -15,10 +15,10 @@ const registerMail=async(user,subject)=>{
     <h2>Thanks for registering,</h2>
     <h3>Welcome to our website FoodBite! Hope you will enjoy with ordering your meal with our website!!</h3>
     <h5>Search Your Restuarants by entering your city</h5>
-    <h3>http://localhost:3000/menu</h3>
+    <h3>${process.env.CLIENT}/menu</h3>
     <br />
     <h4>Your DashBoard : </h4>
-    <span>http://localhost:3000/profile</span>
+    <span>${process.env.CLIENT}/profile</span>
     
     <br />
     <p><b>Thanks and Regards ,</b></p>
@@ -62,7 +62,7 @@ const ContactMail=async(user,subject)=>{
     <h5>We try our best to find solution for your message</h5>
     <br />
     <h4>Your DashBoard : </h4>
-    <span>http://localhost:3000/profile</span>
+    <span>${process.env.CLIENT}/profile</span>
     
     <br />
     <p><b>Thanks and Regards ,</b></p>
