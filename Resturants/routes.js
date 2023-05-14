@@ -12,7 +12,8 @@ const {
   updatevacancies,
   addrecipe,
   getallrestuarant,
-  updateres
+  updateres,
+  addstars
 } = require("./controllers");
 const { userauth } = require("../middlewares/UserAuth");
 const { Resauth } = require("../middlewares/ResAuth");
@@ -53,5 +54,9 @@ resturantroute.post("/getallrestuarant",getallrestuarant)
 // update data
 
 resturantroute.patch("/updateres",updateres)
+
+// add star ratings by user id
+
+resturantroute.post("/addstars/:_id",addstars);
 
 module.exports = { resturantroute };

@@ -100,6 +100,10 @@ const restaurantSchema = new mongoose.Schema({
       },
     },
   ],
+  totalRating:{
+    type:String,
+    default:0
+  }
 });
 
 restaurantSchema.virtual("password").set(function (password) {

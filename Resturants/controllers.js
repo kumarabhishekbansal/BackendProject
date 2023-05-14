@@ -473,6 +473,73 @@ const updateres=async(req,res)=>{
   }
 }
 
+const addstars=async(req,res)=>{
+  try {
+    console.log("enter add start");
+    const {_id}=req.params;
+    const {star,resId}=req.body;
+    // console.log(_id,star,resId);
+    const ress=await Restaurant.findById(resId);
+    let alreadyrated=ress.ratings.find((userid)=>{
+      console.log(userid.postedBy);
+      if(userid.postedBy) return userid.postedBy.toString()===_id.toString()
+    });
+    if(alreadyrated)
+    {
+        const updaterating=await Restaurant.updateOne({
+          ratings:{$elemMatch:alreadyrated},
+        },
+        {
+          $set:{"ratings.$.star":star},
+        },
+        {
+          new :true
+        }
+        );
+         res.status(200).json({
+          message:"ratings updated",
+          data:updaterating
+        })
+    }else{
+      const ratedres=await Restaurant.findByIdAndUpdate(resId,{
+        $push:{ratings:{star:star,postedBy:_id}}
+      },{new:true},
+      );
+
+       res.status(200).json({
+        message:"Ratings add",
+        data:ratedres
+      })
+    }
+
+      const getallratings=await Restaurant.findById(resId);
+
+      let totalRating=getallratings.ratings.length;
+      let ratingsum=getallratings.ratings.map((item)=>item.star).reduce((prev,curr)=>prev+curr,0);
+      let actualratings=Math.round(ratingsum/totalRating);
+      let finalupdation=await Restaurant.findByIdAndUpdate(resId,{
+        totalRating:actualratings
+      }
+      ,{
+        new:true,
+      });
+      if(finalupdation)
+      console.log(finalupdation);
+      {
+        return res.status(200).json({
+          message:"final ratings updated",
+          data:finalupdation
+        })
+      }
+
+      
+      
+  } catch (error) {
+    console.log(error);
+   console.log("error while posting addstars"); 
+  }
+}
+
 module.exports = {
   register,
   login,
@@ -486,5 +553,6 @@ module.exports = {
   updatevacancies,
   addrecipe,
   getallrestuarant,
-  updateres
+  updateres,
+  addstars
 };
