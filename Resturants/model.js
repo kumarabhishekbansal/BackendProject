@@ -6,13 +6,13 @@ const restaurantSchema = new mongoose.Schema({
   owners: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref:"User"
+      ref: "User",
     },
-],
+  ],
   trademark: {
     type: String,
     required: true,
-    unique:true
+    unique: true,
   },
   email: {
     type: String,
@@ -21,20 +21,20 @@ const restaurantSchema = new mongoose.Schema({
     lowercase: true,
   },
   address: {
-    type:String
+    type: String,
   },
-  city:{
-    type:String,
+  city: {
+    type: String,
   },
-  zipcode:{
-    type:String
+  zipcode: {
+    type: String,
   },
   phone: {
     type: String,
     required: true,
   },
-  description:{
-    type:String
+  description: {
+    type: String,
   },
   openHours: {
     type: String,
@@ -44,37 +44,63 @@ const restaurantSchema = new mongoose.Schema({
     type: String,
     default: "10:00 PM",
   },
-  isvacancies:{
-    type:Boolean,
-    default:false,
+  isvacancies: {
+    type: Boolean,
+    default: false,
   },
-  recipies:[{
-    itemname:{
-        type:String,
-    },itemdes:{
-      type:String,
-    },itemimg:{
-      type:String,
+  recipies: [
+    {
+      itemname: {
+        type: String,
+      },
+      itemdes: {
+        type: String,
+      },
+      itemimg: {
+        type: String,
+      },
+      iteming: {
+        type: String,
+      },
+      itemdirection: {
+        type: String,
+      },
+      itemprice: {
+        type: String,
+      },
     },
-    iteming:{
-      type:String,
-    },itemdirection:{
-      type:String,
-    },
-    itemprice:{
-      type:String,
-    }
-  }],
-  profile:{
-    type:String,
+  ],
+  profile: {
+    type: String,
   },
-  category:{
-    type:String,
-    default:"both",
-  }
- 
+  category: {
+    type: String,
+    default: "both",
+  },
+  ratings: [
+    {
+      star: {
+        type: Number,
+        default: 0,
+      },
+      postedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    },
+  ],
+  reviews: [
+    {
+      subject: {
+        type: String,
+      },
+      postedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    },
+  ],
 });
-
 
 restaurantSchema.virtual("password").set(function (password) {
   this.key = uuid.v4();

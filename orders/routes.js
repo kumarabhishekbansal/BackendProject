@@ -5,7 +5,9 @@ const {
   findorders,
   orderrating,
   orderdetail,
-  addorder
+  addorder,
+  getresorders,
+  updateorders
 } = require("./controllers");
 
 // post order after final payment
@@ -37,4 +39,10 @@ orderroute.put("/orderrating/:_id",orderrating);
 
 orderroute.post("/addorder",addorder)
 
+// get all users who have ordered from particualr restuarant 
+
+orderroute.get("/getresorders/:_id",getresorders);
+
+
+orderroute.post("/updateorders/:_id",updateorders);
 module.exports = { orderroute };

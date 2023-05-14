@@ -3,15 +3,18 @@ const {addorder}=require("../orders/controllers");
 const addcartitems=async(req,res)=>{
     try {
         console.log("addcartitems");
-        const {cart,userId}=req.body;
-        // console.log(cart,userId);
+        const {cart,userId,amountoff}=req.body;
+        console.log(cart,userId,amountoff);
         let addcart=await Cart.create({
             userId:userId,
         });
 
         let resId="";
-
+        var amount=0;
+        var totalAmount=0;
         cart.map(async(val)=>{
+            amount+=val.price*val.quantity;
+            console.log("amount is : ",amount);
             const Items=[
                 {
                     itemimg:val.photo,
@@ -26,9 +29,17 @@ const addcartitems=async(req,res)=>{
             // addcart.items.push(Items);
             await Cart.updateOne({_id:addcart._id},{
                 $push:{items:Items}
-            })
-           
+            })       
         })
+        await Cart.updateMany({_id:addcart._id},{
+            amount:amount,
+            amountoff:amountoff,
+            totalAmount:totalAmount
+        },
+        {
+            new:true
+        })
+
         if(addcart)
         {
             // console.log(userId," ",resId," ",addcart._id);
@@ -36,6 +47,7 @@ const addcartitems=async(req,res)=>{
             //     message:"item pushed",
             //     data:addcart
             // })
+            // console.log("add to cart is : ",addcart);
             const data={
                 userId:userId,
                 resId:resId,

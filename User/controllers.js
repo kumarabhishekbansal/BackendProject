@@ -187,7 +187,7 @@ const addcashbackpoints = async (req, res) => {
       { cashbackpoints: points }
     );
     findpoint = await User.findById({ _id: userId });
-    console.log(findpoint);
+    // console.log(findpoint);
     return res.status(200).json({
       message: "points updated",
       data: findpoint,

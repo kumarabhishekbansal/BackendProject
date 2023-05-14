@@ -28,6 +28,18 @@ const cartschema = new mongoose.Schema({
       }
     },
   ],
+  amount:{
+    type:Number,
+    default:0
+  },
+  amountoff:{
+    type:Number,
+    default:0
+  },
+  totalAmount:{
+    type:Number,
+    default:0
+  }
 },{timestamps:true});
 
 const Cart = new mongoose.model("Cart", cartschema);

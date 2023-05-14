@@ -72,14 +72,12 @@ const orderSchema = new mongoose.Schema(
     },
     phone: { type: String, required: true },
     address: { type: String, required: true },
-    orderstatus: { type: String, default: "order_placed" },
+    orderstatus: { type: String, default: "Placed" },
     orderRatings: {
       type: Number,
       default: 4,
     },
     payment:{
-      // type: mongoose.Schema.Types.ObjectId,
-      // ref: "Payment",
       type:String,
       default:"Online"
   },
